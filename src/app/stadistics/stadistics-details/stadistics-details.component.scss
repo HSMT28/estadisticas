@@ -1,0 +1,165 @@
+body {
+    color: white;
+    text-align: center;
+}
+
+.contenedor {
+    width: 55vw;
+    margin: 0 auto;
+    margin-bottom: 100px;
+}
+
+.stadistics-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: rgba(102, 100, 100, 0.295);
+    position: relative;
+    text-align: center;
+    border-radius: 15px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    min-height: 5vh;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.content-details {
+    overflow: visible;
+    width: 100%;
+}
+
+.stadistics-card.expanded {
+    height: auto;
+    min-height: auto;
+}
+
+.stadistics-card img {
+    max-width: 70%;
+    height: auto;
+    padding-bottom: 25px;
+}
+
+.title {
+    text-align: center;
+    padding-top: 15px;
+    padding-bottom: 5px;
+    font-size: 3rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #ffffff;
+    text-shadow: 0 1px 0 #ccc, 0 2px 0 #bbb, 0 3px 0 #aaa, 0 4px 0 #999, 0 5px 0 #888;
+    font-family: 'Georgia', serif;
+}
+
+.text-neon {
+    font-size: 16px;
+    color: white;
+}
+
+//Circulos de resultados
+.circle {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    font-size: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-right: 10px;
+    font-family: Arial, sans-serif;
+}
+
+.win {
+    color: green;
+}
+
+.lose {
+    color: red;
+}
+
+.draw {
+    color: yellow;
+}
+
+.img-team {
+    height: 40px;
+    width: 40px;
+    object-fit: contain;
+    margin-right: 10px;
+    padding: 0px !important;
+}
+
+.name-team {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 14px;
+    margin-right: 10px;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+.stadistics-details {
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.sub-title {
+    font-size: 2rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: rgb(255, 0, 0);
+    text-shadow: 0 0 5px rgb(0, 0, 0), 0 0 10px rgb(0, 0, 0), 0 0 20px rgb(255, 38, 0), 0 0 40px rgb(255, 38, 0);
+    font-family: 'Orbitron', sans-serif;
+    position: relative;
+    display: inline-block;
+}
+
+.container-result {
+    padding-left: 40px;
+}
+
+.btn-volver {
+    background: none;
+    font-size: 50px;
+    padding: 12px 12px;
+    border-radius: 0px;
+    border: none;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+.btn-volver:hover {
+    animation: none;
+    filter: drop-shadow(0px 5px 1px rgb(255, 0, 0));
+    animation: bounce 0.4s ease infinite;
+    color: white;
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    30% {
+        transform: translateY(-8px);
+    }
+    60% {
+        transform: translateY(-5px);
+    }
+}
+
+.container-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo-details {
+    align-items: end;
+    justify-content: end;
+}

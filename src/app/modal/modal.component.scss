@@ -1,0 +1,59 @@
+.modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    padding: 20px;
+    border-radius: 10px;
+    position: relative;
+    width: 50%;
+    height: 70%;
+    background: radial-gradient(circle at top left, rgba(230, 8, 8, 0.336), transparent 60%),
+              radial-gradient(circle at bottom right, rgba(230, 8, 8, 0.336), transparent 60%),
+              radial-gradient(circle at center, rgba(230, 8, 8, 0.336), transparent 60%,)
+              black;
+    box-sizing: border-box;
+    /*overflow-x: hidden;
+    background-image: url('/images/fondo8.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;*/
+    border: 2px solid #000000;
+    overflow-y: auto;
+
+    scrollbar-width: thin;
+    scrollbar-color: #790303 #2e2e2e;
+
+    &::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: #2e2e2e;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: #790303;
+        border-radius: 4px;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+        background: #790303;
+    }
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 30px;
+    cursor: pointer;
+}

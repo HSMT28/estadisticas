@@ -1,0 +1,35 @@
+<div class="container py-5">
+    <h1 class="teams-title"><span>{{ nameCountry }}</span></h1>
+
+    <div *ngIf="!detalle">
+        <div *ngIf="league.length > 1" class="row">
+            <div class="col-md-6" *ngFor="let league of league">
+                <div class="league-card" (click)="seeDetails(league.id)">
+                    <img src="{{ league.image }}" class="img-fluid">
+                    <span class="text-neon">{{ league.name }}</span>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="league.length <= 1">
+            <div class="col-md-12" *ngFor="let league of league">
+                <div class="league-card" (click)="seeDetails(league.id)">
+                    <img src="{{ league.image }}" class="img-fluid">
+                    <span class="text-neon">{{ league.name }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row mt-4" *ngIf="detalle">
+        <div class="col-md-2 mb-4 container-card" *ngFor="let team of teams">
+            <div class="team-card">
+                <img src="{{ team.image }}" class="img-fluid">
+                <p class="name-team">{{ team.name }}</p>
+                <button class="btn-stadistics" [routerLink]="['/stadistics/details', generateRandomCode(team.id)]">Ver Estadisticas</button>
+            </div>
+        </div>
+        <div class="col-md-12 mb-4 container-button">
+            <span class="btn-volver" (click)="chooseLeague()">VOLVER</span>
+        </div>
+    </div>
+</div>

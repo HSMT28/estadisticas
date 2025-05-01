@@ -1,0 +1,155 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.example-container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: radial-gradient(circle at top left, rgba(230, 8, 8, 0.548), transparent 50%),
+              radial-gradient(circle at bottom right, rgba(230, 8, 8, 0.548), transparent 50%),
+              radial-gradient(circle at center, rgba(230, 8, 8, 0.548), transparent 50%,)
+              black;
+}
+
+mat-sidenav-container {
+    height: calc(100vh - 56px);
+    margin-top: 0px;
+    margin-bottom: 56px;
+    display: flex;
+}
+
+mat-sidenav {
+    width: 100px;
+    height: calc(100vh - 56px);
+    position: fixed;
+    top: 12px;
+    left: 0;
+    border-right: none;
+    background: rgba(102, 100, 100, 0.295);
+    padding: 15px;
+    text-align: center;
+    overflow: hidden;
+    align-content: center;
+    transition: width 0.2s ease-in-out;
+
+    scrollbar-width: thin;
+    scrollbar-color: #790303 #2e2e2e;
+
+    &::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: #2e2e2e;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: #790303;
+        border-radius: 4px;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+        background: #790303;
+    }
+}
+
+mat-sidenav:hover {
+    width: 250px;
+    cursor: pointer;
+    transition: width 0.1s;
+}
+
+mat-sidenav-content {
+    margin-left: 250px;
+    flex-grow: 1;
+    padding: 16px;
+    overflow: auto;
+    font-size: 2rem;
+    transition: margin-left 0.2s ease-in-out;
+}
+
+mat-toolbar {
+    height: 56px;
+    line-height: 56px;
+    background-color: none;
+    background-image: 
+        radial-gradient(circle, rgba(0, 0, 0, 0.1) 10%, transparent 10%),
+        radial-gradient(circle, rgba(255, 255, 255, 0.05) 10%, transparent 10%);
+    background-size: 25px 25px, 50px 50px;
+    background-blend-mode: overlay;
+    color: white;
+    padding: 35px;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.avatar {
+    margin-top: 16px;
+    width: 50px;
+    border-radius: 50%;
+}
+
+mat-sidenav:hover .avatar {
+    margin-top: 16px;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+}
+
+.stylelist {
+    color: white;
+    font-family: 'Courier New', Courier, monospace;
+    text-decoration: none;
+    display: none;
+    padding-left: 5px;
+}
+
+mat-sidenav:hover .stylelist {
+    display: inline;
+}
+
+mat-list-item:hover {
+    background-color: #790303;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.1s;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 56px;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+footer mat-toolbar {
+    width: 100%;
+    display: flex;
+    align-items: end;
+    justify-content: end;
+    text-align: end;
+    background: none;
+}
+
+footer img {
+    margin-left: 5px;
+    height: 75px;
+}
+
+.logoCompetencia {
+    width: 40px;
+    border-radius: 50%;
+    align-items: center;
+    //filter: drop-shadow(0px 0px 1px rgb(255, 0, 0));
+    //filter: drop-shadow(0px 0px 1px rgb(255, 238, 0));
+    filter: drop-shadow(0px 0px 3px rgb(51, 255, 0));
+}

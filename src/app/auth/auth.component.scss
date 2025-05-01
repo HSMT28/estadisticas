@@ -1,0 +1,117 @@
+mat-sidenav-container {
+    height: 100vh;
+    width: 100vw;
+    overflow-x: hidden;
+    background-image: url('/images/fondo2.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+mat-sidenav-content {
+    width: 100vw;
+    overflow-x: hidden;
+    align-content: end;
+    padding-bottom: 100px;
+}
+
+// Degradado multicolor animado
+.fancy-text {
+    font-size: 3rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    background: linear-gradient(90deg, #ff0000, #ff7300, #ffea00, #00ff00, #007bff, #8a2be2);
+    background-size: 400% 400%;
+    color: transparent;
+    animation: gradientAnimation 5s infinite linear;
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+}
+  
+@keyframes gradientAnimation {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+// Efecto Fuego
+.fancy-text-fire {
+    font-size: 4rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #ff4500;
+    text-shadow: 0 0 10px #ff5733, 0 0 20px #ff4500, 0 0 30px #ff2200;
+    font-family: 'Comic Sans MS', sans-serif;
+}
+
+// Neon Brillante
+.fancy-text-neon {
+    font-size: 3rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #0ff;
+    text-shadow: 0 0 5px #0ff, 0 0 10px #0ff, 0 0 20px #00f, 0 0 40px #00f;
+    font-family: 'Orbitron', sans-serif;
+}
+
+// Espejo/Reflejo
+.fancy-text-reflection {
+    font-size: 3rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #ffffff;
+    text-shadow: 0 1px 0 #ccc, 0 2px 0 #bbb, 0 3px 0 #aaa, 0 4px 0 #999, 0 5px 0 #888;
+    font-family: 'Georgia', serif;
+}
+
+.introduction {
+    padding-top: 50px;
+    color: white;
+}
+
+button {
+    background: none;
+    font-size: 150px;
+    padding: 12px 12px;
+    border-radius: 0px;
+    border: none;
+    cursor: pointer;
+    border-radius: 50%;
+    animation: bounce 0.4s ease infinite;
+}
+
+button:hover {
+    animation: none;
+    filter: drop-shadow(0px 5px 1px rgb(255, 0, 0));
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    30% {
+        transform: translateY(-8px);
+    }
+    60% {
+        transform: translateY(-5px);
+    }
+}
+
+button:active {
+    transform: scale(0.9);
+}
+
+.btnRegister {
+    align-items: end;
+    justify-content: end;
+    display: flex;
+    color: white;
+    padding-right: 50px;
+    font-size: 1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: rgb(255, 0, 0);
+    text-shadow: 0 0 5px rgb(230, 12, 12), 0 0 10px rgb(230, 12, 12), 0 0 20px rgb(255, 0, 0), 0 0 40px rgb(255, 0, 0);
+    font-family: 'Orbitron', sans-serif;
+    cursor: pointer;
+}

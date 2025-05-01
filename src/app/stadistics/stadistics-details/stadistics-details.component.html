@@ -1,0 +1,141 @@
+<div class="contenedor">
+    <h1 class="title"><span>STADISTICS</span></h1>
+    <div class="row justify-content-center">
+        <div class="col-md-12 py-2" >
+            <div class="stadistics-card text-center" [ngClass]="{'expanded': sectionsState[1]}" (click)="toggleCard(1)">
+                <span class="text-neon" *ngIf="sectionsState[1]"> Matches </span>
+                <div class="row justify-content-center content-details" *ngIf="!sectionsState[1]">
+                    <div class="col-12">
+                        <span class="sub-title"> Matches </span>
+                    </div>
+                    <div class="row col-md-12 d-flex stadistics-details" *ngFor="let match of matches">
+                        <div class="col-md-1 container-result" *ngIf="match.result === 'G'"><div class="circle win">G</div></div>
+                        <div class="col-md-1 container-result" *ngIf="match.result === 'P'"><div class="circle lose">P</div></div>
+                        <div class="col-md-1 container-result" *ngIf="match.result === 'E'"><div class="circle draw">E</div></div>
+                        <div class="col-md-2"><img src="{{ match.imageLocal }}" class="img-team"></div>
+                        <div class="col-md-3 d-flex align-items-center justify-content-center">
+                            <div class="name-team">{{ match.nameLocal }}</div>
+                        </div>
+                        <div class="col-md-1 d-flex align-items-center justify-content-center">
+                            <div class="name-team">{{ match.scoreLocal }}</div>
+                            <div class="name-team"> - </div>
+                            <div class="name-team">{{ match.scoreVisitor }}</div>
+                        </div>
+                        <div class="col-md-3 d-flex align-items-center justify-content-center">
+                            <div class="name-team">{{ match.nameVisitor }}</div>
+                        </div>
+                        <div class="col-md-2"><img src="{{ match.imageVisitor }}" class="img-team"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 py-2">
+            <div class="stadistics-card text-center"  [ngClass]="{'expanded': sectionsState[2]}" (click)="toggleCard(2)">
+                <span class="text-neon" *ngIf="sectionsState[2]"> Cards </span>
+                <div class="row justify-content-center content-details" *ngIf="!sectionsState[2]">
+                    <div class="col-10">
+                        <span class="sub-title"> Cards </span>
+                    </div>
+                    <div class="row col-md-12 d-flex stadistics-details" *ngFor="let match of matches">
+                        <div class="col-md-2"><img src="{{ match.imageLocal }}" class="img-team"></div>
+                        <div class="col-md-2"><img src="/images/amarilla.png" class="img-team"></div>
+                        <div class="col-md-1 d-flex align-items-center justify-content-center">
+                            <div class="name-team">{{ match.scoreLocal }}</div>
+                            <div class="name-team"> - </div>
+                            <div class="name-team">{{ match.scoreVisitor }}</div>
+                        </div>
+                        <div class="col-md-2"><img src="/images/roja.png" class="img-team"></div>
+                        <div class="col-md-1 d-flex align-items-center justify-content-center">
+                            <div class="name-team">{{ match.scoreLocal }}</div>
+                            <div class="name-team"> - </div>
+                            <div class="name-team">{{ match.scoreVisitor }}</div>
+                        </div>
+                        <div class="col-md-1"></div>
+                        <div class="col-md-2"><img src="{{ match.imageVisitor }}" class="img-team"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 py-2">
+            <div class="stadistics-card text-center" [ngClass]="{'expanded': sectionsState[3]}" (click)="toggleCard(3)">
+                <span class="text-neon" *ngIf="sectionsState[3]"> Corners </span>
+                <div class="row justify-content-center content-details" *ngIf="!sectionsState[3]">
+                    <div class="col-10">
+                        <span class="sub-title"> Corners </span>
+                    </div>
+                    <div class="row col-md-12 d-flex stadistics-details" *ngFor="let match of matches">
+                        <div class="col-md-1 d-flex logo-details"><img src="/images/flag.png" class="img-team"></div>
+                        <div class="col-md-2"><img src="{{ match.imageLocal }}" class="img-team"></div>
+                        <div class="col-md-3 d-flex align-items-center justify-content-center">
+                            <div class="name-team">{{ match.nameLocal }}</div>
+                        </div>
+                        <div class="col-md-1 d-flex align-items-center justify-content-center">
+                            <div class="name-team">{{ match.scoreLocal }}</div>
+                            <div class="name-team"> - </div>
+                            <div class="name-team">{{ match.scoreVisitor }}</div>
+                        </div>
+                        <div class="col-md-3 d-flex align-items-center justify-content-center">
+                            <div class="name-team">{{ match.nameVisitor }}</div>
+                        </div>
+                        <div class="col-md-2"><img src="{{ match.imageVisitor }}" class="img-team"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 py-2">
+            <div class="stadistics-card text-center"  [ngClass]="{'expanded': sectionsState[4]}" (click)="toggleCard(4)">
+                <span class="text-neon" *ngIf="sectionsState[4]"> Shots </span>
+                <div class="row justify-content-center content-details" *ngIf="!sectionsState[4]">
+                    <div class="col-10">
+                        <span class="sub-title"> Shots </span>
+                    </div>
+                    <div class="row col-md-12 d-flex stadistics-details" *ngFor="let match of matches">
+                        <div class="col-md-1 d-flex logo-details"><img src="/images/tiros.png" class="img-team"></div>
+                        <div class="col-md-2"><img src="{{ match.imageLocal }}" class="img-team"></div>
+                        <div class="col-md-3 d-flex align-items-center justify-content-center">
+                            <div class="name-team">{{ match.nameLocal }}</div>
+                        </div>
+                        <div class="col-md-1 d-flex align-items-center justify-content-center">
+                            <div class="name-team">{{ match.scoreLocal }}</div>
+                            <div class="name-team"> - </div>
+                            <div class="name-team">{{ match.scoreVisitor }}</div>
+                        </div>
+                        <div class="col-md-3 d-flex align-items-center justify-content-center">
+                            <div class="name-team">{{ match.nameVisitor }}</div>
+                        </div>
+                        <div class="col-md-2"><img src="{{ match.imageVisitor }}" class="img-team"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 py-2">
+            <div class="stadistics-card text-center"  [ngClass]="{'expanded': sectionsState[5]}" (click)="toggleCard(5)">
+                <span class="text-neon" *ngIf="sectionsState[5]"> Shots Goal </span>
+                <div class="row justify-content-center content-details" *ngIf="!sectionsState[5]">
+                    <div class="col-10">
+                        <span class="sub-title"> Shots Goal </span>
+                    </div>
+                    <div class="row col-md-12 d-flex stadistics-details" *ngFor="let match of matches">
+                        <div class="col-md-1 d-flex logo-details"><img src="/images/tirosArco.png" class="img-team"></div>
+                        <div class="col-md-2"><img src="{{ match.imageLocal }}" class="img-team"></div>
+                        <div class="col-md-3 d-flex align-items-center justify-content-center">
+                            <div class="name-team">{{ match.nameLocal }}</div>
+                        </div>
+                        <div class="col-md-1 d-flex align-items-center justify-content-center">
+                            <div class="name-team">{{ match.scoreLocal }}</div>
+                            <div class="name-team"> - </div>
+                            <div class="name-team">{{ match.scoreVisitor }}</div>
+                        </div>
+                        <div class="col-md-3 d-flex align-items-center justify-content-center">
+                            <div class="name-team">{{ match.nameVisitor }}</div>
+                        </div>
+                        <div class="col-md-2"><img src="{{ match.imageVisitor }}" class="img-team"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 mb-4 container-button">
+            <span class="btn-volver" onclick="window.history.back();">VOLVER</span>
+        </div>
+    </div>
+</div>

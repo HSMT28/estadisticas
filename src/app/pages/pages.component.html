@@ -1,0 +1,32 @@
+<mat-sidenav-container class="example-container">
+    <mat-sidenav mode="side" opened>
+        <img class="avatar" src="/images/logo.png" alt="">
+        <mat-list role="list">
+            <mat-list-item
+                role="listitem"
+                *ngFor="let competicion of competitions; let i = index"
+                (click)="selectCompetition(competicion.name)"
+                [routerLink]="['team', generateRandomCode(competicion.id)]">
+                <span class="itemList">
+                    <img class="logoCompetencia" src="{{ competicion.image }}">
+                    <span class="stylelist">{{ competicion.name }}</span>
+                </span>
+            </mat-list-item>
+        </mat-list>
+    </mat-sidenav>
+    
+    <mat-sidenav-content>
+        <router-outlet></router-outlet>
+    </mat-sidenav-content>
+
+</mat-sidenav-container>
+
+<footer>
+    <mat-toolbar>
+        <span class="contacto">Harold Shneider Martinez Tapiero - 3172393277</span>
+        <mat-icon>Facebook</mat-icon>
+        <mat-icon>Linkedin</mat-icon>
+        <mat-icon>Correo</mat-icon>
+        <mat-icon>Instagram</mat-icon>
+    </mat-toolbar>
+</footer>

@@ -1,0 +1,263 @@
+<div class="example-container">
+  <div class="main-container">
+    <form class="register-form" [formGroup]="matchData">
+        <h2 class="form-title">REGISTER MATCH</h2>
+      
+        <div class="name-fields">
+          <mat-form-field appearance="outline" class="name-input">
+            <mat-label>Country Local</mat-label>
+            <mat-select formControlName="countryLocal">
+                <mat-option *ngFor="let country of countries" [value]="country.id">
+                  {{ country.name }}
+                </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <img *ngIf="imageCountryLocal" src="{{ imageCountryLocal }}" class="img-country">
+      
+          <mat-form-field appearance="outline" class="name-input">
+            <mat-label>Country Visitor</mat-label>
+            <mat-select formControlName="countryVisitor">
+                <mat-option *ngFor="let country of countries" [value]="country.id">
+                  {{ country.name }}
+                </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <img *ngIf="imageCountryVisitor" src="{{ imageCountryVisitor }}" class="img-country">
+        </div>
+
+        <div class="name-fields">
+          <mat-form-field appearance="outline" class="name-input">
+            <mat-label>Local</mat-label>
+            <mat-select formControlName="localTeam">
+                <mat-option *ngFor="let team of teamsLocal" [value]="team.id">
+                  {{ team.name }}
+                </mat-option>
+            </mat-select>
+          </mat-form-field>
+      
+          <mat-form-field appearance="outline" class="name-input">
+            <mat-label>Visitor</mat-label>
+            <mat-select formControlName="visitorTeam" class="color-select">
+                <mat-option *ngFor="let team of teamsVisitor" [value]="team.id">
+                  {{ team.name }}
+                </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <button type="button" mat-icon-button class="add-button" (click)="registerTeam()">
+            <mat-icon>add</mat-icon>
+          </button>
+        </div>
+
+        <div class="name-fields">
+          <mat-form-field appearance="outline" class="name-input">
+            <mat-label>Goals Local</mat-label>
+            <input matInput type="text" placeholder="Goals Local" [matAutocomplete]="auto" formControlName="goalsLocal" />
+            <mat-autocomplete #auto="matAutocomplete">
+              <mat-option *ngFor="let name of filteredNames" [value]="name">
+                {{ name }}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+      
+          <mat-form-field appearance="outline" class="name-input">
+            <mat-label>Goals Visitor</mat-label>
+            <input matInput type="text" placeholder="Goals Visitor" formControlName="goalsVisitor">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="name-input">
+            <mat-label>Cards Local</mat-label>
+            <input matInput type="text" placeholder="Cards Local" formControlName="cardsLocal">
+          </mat-form-field>
+      
+          <mat-form-field appearance="outline" class="name-input">
+            <mat-label>Cards Visitor</mat-label>
+            <input matInput type="text" placeholder="Cards Visitor" formControlName="cardsVisitor">
+          </mat-form-field>
+        </div>
+
+        <div class="name-fields">
+          <mat-form-field appearance="outline" class="name-input">
+            <mat-label>Shots Local</mat-label>
+            <input matInput type="text" placeholder="Shots Local" formControlName="shotsLocal">
+          </mat-form-field>
+      
+          <mat-form-field appearance="outline" class="name-input">
+            <mat-label>Shots Visitor</mat-label>
+            <input matInput type="text" placeholder="Shots Visitor" formControlName="shotsVisitor">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="name-input">
+            <mat-label>Shots Goal Local</mat-label>
+            <input matInput type="text" placeholder="Shots Goal Local" formControlName="shotsGoalLocal">
+          </mat-form-field>
+      
+          <mat-form-field appearance="outline" class="name-input">
+            <mat-label>Shots Goal Visitor</mat-label>
+            <input matInput type="text" placeholder="Shots Goal Visitor" formControlName="shotsGoalVisitor">
+          </mat-form-field>
+        </div>
+
+        <div class="name-fields">
+          <mat-form-field appearance="outline" class="name-input">
+            <mat-label>Corners Local</mat-label>
+            <input matInput type="text" placeholder="Corners Local" formControlName="cornersLocal">
+          </mat-form-field>
+      
+          <mat-form-field appearance="outline" class="name-input">
+            <mat-label>Corners Visitor</mat-label>
+            <input matInput type="text" placeholder="Corners Visitor" formControlName="cornersVisitor">
+          </mat-form-field>
+        </div>
+      
+        <div class="checkbox-scorers">
+          <mat-checkbox (change)="addStats($event)" [disabled]="matchData.get('statsPlayer')?.value?.length > 0">
+            <span class="text-checkbox">Add Stats Players</span>
+          </mat-checkbox>
+          <button type="button" mat-icon-button  *ngIf="matchData.get('statsPlayer')?.value?.length">
+            <mat-icon class="icono">visibility</mat-icon>
+          </button>
+          <button type="button" mat-icon-button class="add-button-scorers" *ngIf="addStatsPlayer" (click)="addStatsPlayers()">
+            <mat-icon class="icono">add</mat-icon>
+          </button>
+        </div>
+      
+        <button mat-raised-button [disabled]="!matchData.valid" color="primary" class="register-button" (click)="register()">SAVE</button>
+    </form>
+
+    <div class="table-info" *ngIf="dataMatch !== null">
+      <table mat-table [dataSource]="dataMatch" class="mat-elevation-z2 full-width-table">
+
+        <ng-container matColumnDef="Local">
+          <th mat-header-cell *matHeaderCellDef class="center-cell"> Local </th>
+          <td mat-cell *matCellDef="let row" class="center-cell"> {{ row.localTeam }} </td>
+        </ng-container>
+    
+        <ng-container matColumnDef="Visitor">
+          <th mat-header-cell *matHeaderCellDef class="center-cell"> Visitante </th>
+          <td mat-cell *matCellDef="let row" class="center-cell"> {{ row.visitorTeam }} </td>
+        </ng-container>
+    
+        <ng-container matColumnDef="Goals Local">
+          <th mat-header-cell *matHeaderCellDef class="center-cell"> Goals Local </th>
+          <td mat-cell *matCellDef="let row" class="center-cell"> {{ row.goalsLocal }} </td>
+        </ng-container>
+    
+        <ng-container matColumnDef="Goals Visitor">
+          <th mat-header-cell *matHeaderCellDef class="center-cell"> Goals Visitor </th>
+          <td mat-cell *matCellDef="let row" class="center-cell"> {{ row.goalsVisitor }} </td>
+        </ng-container>
+    
+        <ng-container matColumnDef="Scorers">
+          <th mat-header-cell *matHeaderCellDef class="center-cell"> Scorers </th>
+          <td mat-cell *matCellDef="let row" class="center-button">
+            <button mat-icon-button class="table-button" (click)="viewStats(row.statsPlayer)">
+              <mat-icon>visibility</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+    
+        <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+        <tr mat-row *matRowDef="let row; columns: columnsToDisplay;"></tr>
+      </table>
+    </div>
+  </div>
+</div>
+<div class="modal-wrapper">
+  <app-modal [showModal]="isOpenModal" (closedModal)="closedModal()">
+    <div *ngIf="viewAddStats" class="container-form-player">
+      <form [formGroup]="playerData" class="form-player">
+        <h2 class="section-title">Stadistics Player</h2>
+  
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Name</mat-label>
+          <input type="text" matInput [matAutocomplete]="auto" formControlName="name"/>
+          <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngFor="let name of filteredNames" [value]="name">
+              {{ name }}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Goals</mat-label>
+          <input type="text" matInput formControlName="goals" />
+        </mat-form-field>
+  
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Assists</mat-label>
+          <input type="text" matInput formControlName="assists" />
+        </mat-form-field>
+      
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Shots</mat-label>
+          <input type="text" matInput formControlName="shots" />
+        </mat-form-field>
+      
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Shots Goal</mat-label>
+          <input type="text" matInput formControlName="shotsGoal" />
+        </mat-form-field>
+      
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Cards</mat-label>
+          <input type="text" matInput formControlName="cards" />
+        </mat-form-field>
+        
+        <span class="msjErrorPlayers" *ngIf="errorDatosPlayer">
+          You must enter the match data first (Do not save match changes until you add the player's)
+        </span>
+        
+        <div class="table-info" *ngIf="dataPlayer">
+          <table mat-table [dataSource]="dataPlayer" class="mat-elevation-z2 full-width-table">
+    
+            <ng-container matColumnDef="Name">
+              <th mat-header-cell *matHeaderCellDef class="center-cell"> Name </th>
+              <td mat-cell *matCellDef="let row" class="center-cell"> {{ row.name }} </td>
+            </ng-container>
+        
+            <ng-container matColumnDef="Goals">
+              <th mat-header-cell *matHeaderCellDef class="center-cell"> Goals </th>
+              <td mat-cell *matCellDef="let row" class="center-cell"> {{ row.goals }} </td>
+            </ng-container>
+        
+            <ng-container matColumnDef="Assists">
+              <th mat-header-cell *matHeaderCellDef class="center-cell"> Assists </th>
+              <td mat-cell *matCellDef="let row" class="center-cell"> {{ row.assists }} </td>
+            </ng-container>
+        
+            <ng-container matColumnDef="Shots">
+              <th mat-header-cell *matHeaderCellDef class="center-cell"> Shots </th>
+              <td mat-cell *matCellDef="let row" class="center-cell"> {{ row.shots }} </td>
+            </ng-container>
+        
+            <ng-container matColumnDef="Shots Goal">
+              <th mat-header-cell *matHeaderCellDef class="center-cell"> Shots Goal </th>
+              <td mat-cell *matCellDef="let row" class="center-cell">{{ row.shotsGoal }}</td>
+            </ng-container>
+  
+            <ng-container matColumnDef="Cards">
+              <th mat-header-cell *matHeaderCellDef class="center-cell"> Cards </th>
+              <td mat-cell *matCellDef="let row" class="center-cell">{{ row.cards }}</td>
+            </ng-container>
+        
+            <tr mat-header-row *matHeaderRowDef="columnsPlayersToDisplay"></tr>
+            <tr mat-row *matRowDef="let row; columns: columnsPlayersToDisplay;"></tr>
+          </table>
+        </div>
+  
+        <div class="button-player">
+          <button type="button" mat-flat-button (click)="saveStatsPlayer()">Save</button>
+          <button type="button" mat-raised-button (click)="closedModal()">Close</button>
+        </div>
+      </form>
+    </div>
+    <div *ngIf="viewRegisterTeam">
+      <h2>Register Team</h2>
+      <p>Aqui se registra el equipo no existente.</p>
+      <button class="btn btn-primary" (click)="closedModal()">Cerrar</button>
+    </div>
+  </app-modal>
+</div>

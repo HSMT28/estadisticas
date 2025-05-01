@@ -1,0 +1,132 @@
+body {
+    color: white;
+    text-align: center;
+}
+.teams-title {
+    text-align: center;
+    padding-bottom: 25px;
+    font-size: 3rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #ffffff;
+    text-shadow: 0 1px 0 #ccc, 0 2px 0 #bbb, 0 3px 0 #aaa, 0 4px 0 #999, 0 5px 0 #888;
+    font-family: 'Georgia', serif;
+}
+.team-card {
+    background: rgba(102, 100, 100, 0.295);
+    position: relative;
+    padding: 20px;
+    text-align: center;
+    border-radius: 15px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    overflow: visible;
+    padding-top: 55px;
+    height: 175px;
+}
+
+.team-card img {
+    position: absolute;
+    top: -20%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: auto;
+}
+
+.container-card {
+    padding-top: 25px;
+}
+
+.btn-stadistics {
+    background: rgba(230, 8, 8, 0.4);
+    color: white;
+    border: none;
+    font-weight: bold;
+    border-radius: 20px;
+    padding: 8px 15px;
+    margin-top: 10px;
+    width: 80%;
+    text-transform: uppercase;
+    font-size: 8px;
+}
+.btn-stadistics:hover {
+    background: rgba(230, 8, 8, 0.7);
+}
+
+.name-team {
+    font-size: 1rem;
+    color: white;
+}
+
+.league-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: rgba(102, 100, 100, 0.295);
+    position: relative;
+    padding: 20px;
+    text-align: center;
+    border-radius: 15px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    overflow: visible;
+    //padding-top: 55px;
+    height: 68vh;
+    align-items: center;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out;
+}
+
+.league-card:hover {
+    transform: scale(0.95);
+}
+
+.league-card img {
+    max-width: 70%;
+    height: auto;
+    padding-bottom: 25px;
+}
+
+.text-neon {
+    font-size: 3rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: rgb(255, 0, 0);
+    text-shadow: 0 0 5px rgb(0, 0, 0), 0 0 10px rgb(0, 0, 0), 0 0 20px rgb(255, 38, 0), 0 0 40px rgb(255, 38, 0);
+    font-family: 'Orbitron', sans-serif;
+    position: relative;
+    display: inline-block;
+}
+
+.btn-volver {
+    background: none;
+    font-size: 50px;
+    padding: 12px 12px;
+    border-radius: 0px;
+    border: none;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+.btn-volver:hover {
+    animation: none;
+    filter: drop-shadow(0px 5px 1px rgb(255, 0, 0));
+    animation: bounce 0.4s ease infinite;
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    30% {
+        transform: translateY(-8px);
+    }
+    60% {
+        transform: translateY(-5px);
+    }
+}
+
+.container-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
