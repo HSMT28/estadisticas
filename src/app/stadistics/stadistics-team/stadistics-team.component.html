@@ -2,8 +2,16 @@
     <h1 class="teams-title"><span>{{ nameCountry }}</span></h1>
 
     <div *ngIf="!detalle">
-        <div *ngIf="league.length > 1" class="row">
+        <div *ngIf="(league.length % 2) == 0" class="row">
             <div class="col-md-6" *ngFor="let league of league">
+                <div class="league-card" (click)="seeDetails(league.id)">
+                    <img src="{{ league.image }}" class="img-fluid">
+                    <span class="text-neon">{{ league.name }}</span>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="league.length > 1 && (league.length % 2) == 1" class="row">
+            <div class="col-md-4" *ngFor="let league of league">
                 <div class="league-card" (click)="seeDetails(league.id)">
                     <img src="{{ league.image }}" class="img-fluid">
                     <span class="text-neon">{{ league.name }}</span>

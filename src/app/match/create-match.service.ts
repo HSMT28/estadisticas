@@ -21,4 +21,20 @@ export class CreateMatchService {
   getAllTeams(): Observable<any> {
     return this.http.get(`${remoteServer.baseUrl}/teams`);
   }
+
+  getAllPlayers(): Observable<any> {
+    return this.http.get(`${remoteServer.baseUrl}/players`);
+  }
+
+  postMatches(dataMatch: any): Observable<string> {
+    return this.http.post(`${remoteServer.baseUrl}/matches/saveMatches`, dataMatch, { responseType: 'text' });
+  }
+
+  getLeagues(idCountry: number): Observable<any> {
+    return this.http.get(`${remoteServer.baseUrl}/league/${idCountry}`);
+  }
+
+  postTeam(dataTeam: any): Observable<string> {
+    return this.http.post(`${remoteServer.baseUrl}/teams/saveTeam`, dataTeam, { responseType: 'text' });
+  }
 }

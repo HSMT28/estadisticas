@@ -57,3 +57,7 @@
     font-size: 30px;
     cursor: pointer;
 }
+
+::ng-deep .cdk-overlay-container {
+    z-index: 2000 !important;
+  }

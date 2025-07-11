@@ -17,4 +17,8 @@ export class StadisticsService {
   getTeams(idLeague: number): Observable<any> {
     return this.http.get(`${remoteServer.baseUrl}/teams/${idLeague}`);
   }
+
+  getMatches(idTeam: number): Observable<any> {
+    return this.http.get(`${remoteServer.baseUrl}/matches/${idTeam}`);
+  }
 }

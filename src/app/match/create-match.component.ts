@@ -16,6 +16,12 @@ import { map, Observable, startWith } from 'rxjs';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatOptionModule } from '@angular/material/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
+export interface Player {
+  id: number
+  name: string
+}
 
 @Component({
   selector: 'app-create-match',
@@ -25,15 +31,18 @@ import { MatOptionModule } from '@angular/material/core';
   templateUrl: './create-match.component.html',
   styleUrl: './create-match.component.scss'
 })
+
 export class CreateMatchComponent implements OnInit {
   matchData!: FormGroup;
   playerData!: FormGroup;
+  teamData!: FormGroup;
   imageCountryLocal: string | null = null;
   imageCountryVisitor: string | null = null;
   idCountryLocal: number = 0;
   idCountryVisitor: number = 0;
   countries: {id: number, name: string, image: string, code: string}[] = [];
   teams: {id: number, name: string, image: string, idLeague: number}[] = [];
+  teamsRegister: {id: number, name: string}[] = [];
   teamsLocal: {id: number, name: string, image: string, idLeague: number}[] = [];
   teamsVisitor: {id: number, name: string, image: string, idLeague: number}[] = [];
   columnsToDisplay = ['Local', 'Visitor', 'Goals Local', 'Goals Visitor', 'Scorers'];
@@ -43,16 +52,18 @@ export class CreateMatchComponent implements OnInit {
   isOpenModal = false;
   viewAddStats = false;
   viewRegisterTeam = false;
+  viewDetailsMatch = false;
   errorDatosPlayer = false;
   dataPlayer: MatTableDataSource<any> | null = null;
+  statsData: any;
 
-  playerNames: string[] = ['Messi', 'Ronaldo', 'Mbappé', 'Haaland', 'Neymar'];
-  filteredNames: string[] = [];
+  playerNames: Player[] = [];
+  filteredNames: Player[] = [];
 
   opciones: string[] = ['Opción 1', 'Opción 2', 'Opción 3'];
   opcionSeleccionada: string = '';
 
-  constructor(private fb: FormBuilder, private createMatchService: CreateMatchService) {}
+  constructor(private fb: FormBuilder, private createMatchService: CreateMatchService, private snackBar: MatSnackBar) {}
 
   ngOnInit(): void {
     this.imageCountryLocal = null;
@@ -64,16 +75,18 @@ export class CreateMatchComponent implements OnInit {
       countryVisitor: [null, Validators.required],
       localTeam: [null, Validators.required],
       visitorTeam: [null, Validators.required],
-      goalsLocal: ['', Validators.required],
-      goalsVisitor: ['', Validators.required],
-      cardsLocal: ['', Validators.required],
-      cardsVisitor: ['', Validators.required],
-      cornersLocal: ['', Validators.required],
-      cornersVisitor: ['', Validators.required],
-      shotsLocal: ['', Validators.required],
-      shotsVisitor: ['', Validators.required],
-      shotsGoalLocal: ['', Validators.required],
-      shotsGoalVisitor: ['', Validators.required],
+      goalsLocal: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
+      goalsVisitor: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
+      cardsLocal: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
+      cardsRedLocal: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
+      cardsVisitor: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
+      cardsRedVisitor: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
+      cornersLocal: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
+      cornersVisitor: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
+      shotsLocal: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
+      shotsVisitor: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
+      shotsGoalLocal: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
+      shotsGoalVisitor: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
       statsPlayer: this.fb.array([])
     });
 
@@ -86,9 +99,17 @@ export class CreateMatchComponent implements OnInit {
       cards: ['', [Validators.required, Validators.pattern('^[0-9]+$')]]
     });
 
+    this.teamData = this.fb.group({
+      idCountry: [null, Validators.required],
+      idLeague: [null, Validators.required],
+      nameTeam: ['', Validators.required],
+      urlImage: ['']
+    });
+
     this.onCountryLocalChange();
     this.onCountryVisitorChange();
     this.onNamePlayerChange();
+    this.onCountryRegisterTeamChange();
 
     this.createMatchService.getCountries().subscribe(
       (data: any[]) => {
@@ -105,6 +126,7 @@ export class CreateMatchComponent implements OnInit {
     );
 
     this.obtenerTeams();
+    this.obtenerPlayers();
   }
 
   onNamePlayerChange() {
@@ -115,8 +137,23 @@ export class CreateMatchComponent implements OnInit {
       )
       .subscribe(filtered => {
         this.filteredNames = filtered;
-        console.log(this.filteredNames);
       });
+  }
+
+  onCountryRegisterTeamChange() {
+    this.teamData.get('idCountry')?.valueChanges.subscribe((value) => {
+      this.createMatchService.getLeagues(value).subscribe(
+        (data: any[]) => {
+          this.teamsRegister = data.map(team => ({
+            id: team.id,
+            name: team.name || ''
+          }));
+        },
+        (error) => {
+          console.error('Error loading teams:', error);
+        }
+      );
+    });
   }
 
   onCountryLocalChange() {
@@ -179,6 +216,20 @@ export class CreateMatchComponent implements OnInit {
     this.teamsVisitor = this.teams;
   }
 
+  obtenerPlayers() {
+    this.createMatchService.getAllPlayers().subscribe(
+      (data: any[]) => {
+        this.playerNames = data.map(player => ({
+          id: player.id,
+          name: player.name || ''
+        }));
+      },
+      (error) => {
+        console.error('Error loading players:', error);
+      }
+    );
+  }
+
   register() {
     const formValue = this.matchData.value;
 
@@ -215,6 +266,22 @@ export class CreateMatchComponent implements OnInit {
     this.viewRegisterTeam = true;
   }
 
+  saveTeam(){
+    this.createMatchService.postTeam(this.teamData?.value ?? null).subscribe(
+      (data: string) => {
+        this.snackBar.open(data, 'Cerrar', {
+          duration: 10000,
+          verticalPosition: 'top',
+        });
+      },
+      (error) => {
+        console.error('Error saving team:', error);
+      }
+    );
+
+    this.ngOnInit();
+  }
+
   openModal() {
     this.isOpenModal = true;
   }
@@ -223,6 +290,7 @@ export class CreateMatchComponent implements OnInit {
     this.isOpenModal = false;
     this.viewAddStats = false;
     this.viewRegisterTeam = false;
+    this.viewDetailsMatch = false;
   }
 
   saveStatsPlayer() {
@@ -239,6 +307,7 @@ export class CreateMatchComponent implements OnInit {
   
         const matchToDisplay = {
           ...formValue,
+          idplayer: this.playerNames.find(x => x.name == this.playerData.get('name')?.value)?.id ?? 0,
         };
   
         const dataExist = this.dataPlayer?.data || [];
@@ -262,11 +331,29 @@ export class CreateMatchComponent implements OnInit {
   }
 
   viewStats(statsPlayer: any) {
-    console.log(statsPlayer);
+    this.statsData = statsPlayer;
+    this.openModal();
+    this.viewDetailsMatch = true;
+    console.log(this.statsData);
   }
 
-  private _filter(value: string): string[] {
+  private _filter(value: string): Player[] {
     const filterValue = value.toLowerCase();
-    return this.playerNames.filter(name => name.toLowerCase().includes(filterValue));
+    return this.playerNames.filter(x => x.name.toLowerCase().includes(filterValue));
+  }
+
+  saveStats(){
+    this.createMatchService.postMatches(this.dataMatch?.data ?? null).subscribe(
+      (data: string) => {
+        this.snackBar.open(data, 'Cerrar', {
+          duration: 10000,
+          verticalPosition: 'top',
+        });
+        this.dataMatch = null;
+      },
+      (error) => {
+        console.error('Error saving games:', error);
+      }
+    );
   }
 }

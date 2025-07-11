@@ -49,12 +49,26 @@ mat-select {
     color: white;
 }
 
+.select-form {
+    color: black;
+}
+
 input {
     color: white !important;
 }
 
+.input-form {
+    color: black !important;
+}
+
 .register-button {
     width: 100%;
+}
+
+.register-team-button {
+    width: 45%;
+    margin-right: 2.5%;
+    margin-left: 2.5%;
 }
 
 .name-fields-with-button {
@@ -70,8 +84,15 @@ input {
     border: 1px solid #ccc;
 }
 
-mat-label {
+.label-form {
     color: white;
+}
+
+.label-msg-form {
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .text-checkbox {
@@ -229,6 +250,19 @@ td:hover {
     box-sizing: border-box;
 }
 
+.container-form-register-team {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 32px;
+    flex-wrap: wrap;
+    width: 100%;
+    height: 100%;
+    padding: 16px;
+    box-sizing: border-box;
+}
+
 .section-title {
     display: flex;
     align-items: center;
@@ -279,4 +313,22 @@ td:hover {
   display: block !important;
   opacity: 1 !important;
   visibility: visible !important;
+}
+
+.img-team {
+    height: 40px;
+    width: 40px;
+    object-fit: contain;
+    margin-right: 10px;
+    padding: 0px !important;
+}
+
+.card-resume {
+  background-color: #fff;
+  border-radius: 12px;
+}
+
+.badge {
+  font-size: 1rem;
+  padding: 0.6em 1em;
 }

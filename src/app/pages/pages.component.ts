@@ -26,7 +26,9 @@ export class PagesComponent implements OnInit {
   loadCountries(): void {
     this.pagesService.getCountries().subscribe(
       (data: any[]) => {
-        this.competitions = data.map(country => ({
+        this.competitions = data
+        .filter(country => country.name.toLowerCase() != 'otro')
+        .map(country => ({
           id: country.id,
           name: country.name || '',
           image: country.image || '',
