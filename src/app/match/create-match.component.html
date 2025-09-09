@@ -116,6 +116,13 @@
             <input matInput type="text" placeholder="Cards Red Visitor" formControlName="cardsRedVisitor">
           </mat-form-field>
         </div>
+
+        <div class="name-fields">
+          <mat-form-field appearance="outline" class="name-input">
+            <mat-label class="label-form">Date Match</mat-label>
+            <input matInput type="date" placeholder="Date Match" formControlName="dateMatch">
+          </mat-form-field>
+        </div>
       
         <div class="checkbox-scorers">
           <mat-checkbox (change)="addStats($event)" [disabled]="matchData.get('statsPlayer')?.value?.length > 0">
@@ -311,10 +318,28 @@
                 </mat-form-field>
               </div>
               <div class="name-fields">
-                <mat-form-field appearance="outline" class="name-input">
-                  <mat-label>Image Team</mat-label>
-                  <input matInput class="input-form" type="text" placeholder="URL Team" formControlName="urlImage" />
-                </mat-form-field>
+                <label style="font-size: 20px;">Image Team</label>
+              </div>
+              <div class="upload-row mb-4">
+                <div class="upload-wrapper">
+                  <button type="button" class="upload-btn" (click)="fileInput.click()" [hidden]="selectedImage">Seleccionar imagen PNG</button>
+
+                  <span class="file-name">
+                    <mat-icon>image</mat-icon>
+                    {{ selectedImage?.name || 'Ningún archivo seleccionado' }}
+                    <button class="remove-btn" (click)="removeImage()" type="button" [hidden]="!selectedImage">
+                      <mat-icon>close</mat-icon>
+                    </button>
+                  </span>
+
+                  <input
+                    #fileInput
+                    type="file"
+                    accept="image/png"
+                    (change)="onFileSelected($event)"
+                    hidden
+                  />
+                </div>
               </div>
               <button type="button" mat-raised-button [disabled]="!teamData.valid" color="primary" class="register-team-button" (click)="saveTeam()">REGISTER</button>
               <button type="button" mat-raised-button color="primary" (click)="closedModal()" class="register-team-button">Close</button>

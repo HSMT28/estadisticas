@@ -37,4 +37,8 @@ export class CreateMatchService {
   postTeam(dataTeam: any): Observable<string> {
     return this.http.post(`${remoteServer.baseUrl}/teams/saveTeam`, dataTeam, { responseType: 'text' });
   }
+
+  postImageTeam(image: any): Observable<string> {
+    return this.http.post(`${remoteServer.baseUrl}/teams/saveImageTeam`, image, { responseType: 'text' });
+  }
 }

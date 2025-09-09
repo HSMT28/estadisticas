@@ -118,6 +118,8 @@ input {
     border-radius: 8px;
     box-sizing: border-box;
     margin-top: 16px;
+    max-height: 750px;
+    overflow-y: auto;
 }
 
 .table-button {
@@ -331,4 +333,61 @@ td:hover {
 .badge {
   font-size: 1rem;
   padding: 0.6em 1em;
+}
+
+//Boton de Adjunto
+.upload-row {
+  display: flex;
+  align-items: flex-start; /* Alínea label arriba */
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.label-form {
+  min-width: 100px;
+  font-weight: 500;
+  padding-top: 6px;
+}
+
+.upload-wrapper {
+  display: flex;
+  //flex-direction: column; /* 👈 importante para que icono + archivo vayan abajo */
+  gap: 8px;
+  flex: 1;
+}
+
+.upload-btn {
+  padding: 6px 12px;
+  background-color: #3f51b5;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  width: fit-content;
+}
+
+.upload-btn:hover {
+  background-color: #303f9f;
+}
+
+.file-name {
+  font-size: 14px;
+  color: #555;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.remove-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #888;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+
+.remove-btn:hover {
+  color: #d32f2f;
 }

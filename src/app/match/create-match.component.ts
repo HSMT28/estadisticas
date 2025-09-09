@@ -38,6 +38,7 @@ export class CreateMatchComponent implements OnInit {
   teamData!: FormGroup;
   imageCountryLocal: string | null = null;
   imageCountryVisitor: string | null = null;
+  selectedImage: File | null = null;
   idCountryLocal: number = 0;
   idCountryVisitor: number = 0;
   countries: {id: number, name: string, image: string, code: string}[] = [];
@@ -87,6 +88,7 @@ export class CreateMatchComponent implements OnInit {
       shotsVisitor: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
       shotsGoalLocal: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
       shotsGoalVisitor: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
+      dateMatch: ['', Validators.required],
       statsPlayer: this.fb.array([])
     });
 
@@ -267,9 +269,26 @@ export class CreateMatchComponent implements OnInit {
   }
 
   saveTeam(){
+    var textImage = "";
+
+    if (this.selectedImage) {
+      const formData = new FormData();
+      formData.append('file', this.selectedImage);
+
+      this.createMatchService.postImageTeam(formData).subscribe(
+        (data: string) => {
+          textImage = data;
+          this.selectedImage = null;
+        },
+        (error) => {
+          console.error('Error saving image team:', error);
+        }
+      );
+    }
+    
     this.createMatchService.postTeam(this.teamData?.value ?? null).subscribe(
       (data: string) => {
-        this.snackBar.open(data, 'Cerrar', {
+        this.snackBar.open(data + textImage, 'Cerrar', {
           duration: 10000,
           verticalPosition: 'top',
         });
@@ -355,5 +374,29 @@ export class CreateMatchComponent implements OnInit {
         console.error('Error saving games:', error);
       }
     );
+  }
+
+  onFileSelected(event: Event): void {
+    const fileInput = event.target as HTMLInputElement;
+
+    if (fileInput.files && fileInput.files.length > 0) {
+      const file = fileInput.files[0];
+
+      if (file.type === 'image/png') {
+        const fileName = file.name;
+        const imagePath = `/images/${fileName}`;
+        console.log(file);
+        this.selectedImage = file;
+
+        this.teamData.get('urlImage')?.setValue(imagePath);
+      } else {
+        alert('Solo se permiten imágenes PNG.');
+      }
+    }
+  }
+
+  removeImage(): void {
+    this.selectedImage = null;
+    this.teamData.get('urlImage')?.reset();
   }
 }
